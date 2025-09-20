@@ -161,9 +161,28 @@ eas env:set GOOGLE_CLIENT_ID=your-client-id --environment=production
 ## Troubleshooting
 
 ### Common DigitalOcean Issues
-1. **Build Failures:** Check build logs in dashboard
-2. **Environment Variables:** Verify all required vars are set
-3. **Database Connection:** Ensure MongoDB Atlas allows DO IP ranges
+
+1. **"Cannot find module" errors:**
+   - Ensure `build_command: npm ci --only=production` is set in app.yaml
+   - Check that package.json is in the correct source directory
+   - Verify all dependencies are listed in package.json (not just devDependencies)
+
+2. **Port/Health Check Issues:**
+   - Don't set PORT in app.yaml - DigitalOcean sets it automatically
+   - Ensure your app uses `process.env.PORT` (our config does this correctly)
+   - Health check should point to `/health` endpoint
+
+3. **Build Failures:** 
+   - Check build logs in DigitalOcean dashboard
+   - Ensure Node.js version compatibility (we use >=18.18.0)
+
+4. **Environment Variables:** 
+   - Verify all required vars are set in DO dashboard
+   - Don't put sensitive vars in app.yaml - use dashboard instead
+
+5. **Database Connection:** 
+   - Ensure MongoDB Atlas allows DigitalOcean IP ranges
+   - Check connection string format in environment variables
 
 ### Common Expo Issues
 1. **Build Failures:** Check EAS build logs

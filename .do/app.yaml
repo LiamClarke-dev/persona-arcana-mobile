@@ -2,7 +2,7 @@
 # This file defines the app structure for deployment
 
 name: persona-arcana-backend
-region: nyc
+region: sfo3
 
 services:
 - name: api
@@ -10,6 +10,7 @@ services:
   github:
     repo: your-username/persona-arcana-mobile
     branch: main
+  build_command: npm ci --only=production
   run_command: npm start
   environment_slug: node-js
   instance_count: 1
@@ -19,14 +20,13 @@ services:
   envs:
   - key: NODE_ENV
     value: production
-  - key: PORT
-    value: "3000"
+  # Note: PORT is automatically set by DigitalOcean App Platform
   # Note: Sensitive variables like MONGODB_URI, JWT_SECRET, etc.
   # should be set in the DigitalOcean dashboard, not here
   
   health_check:
     http_path: /health
-    initial_delay_seconds: 30
+    initial_delay_seconds: 60
     period_seconds: 10
     timeout_seconds: 5
     success_threshold: 1

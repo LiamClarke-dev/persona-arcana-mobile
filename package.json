@@ -1,0 +1,26 @@
+{
+  "name": "persona-arcana-mobile",
+  "version": "1.0.0",
+  "description": "Mobile-first AI journal analysis app with dual AI services",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "mobile-app"
+  ],
+  "scripts": {
+    "install:all": "npm install && npm install --prefix backend && npm install --prefix mobile-app",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:mobile": "npm start --prefix mobile-app",
+    "test": "npm run test --prefix backend && npm run test --prefix mobile-app",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix mobile-app",
+    "lint:fix": "npm run lint:fix --prefix backend && npm run lint:fix --prefix mobile-app",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

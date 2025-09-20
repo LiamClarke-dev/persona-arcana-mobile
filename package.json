@@ -15,12 +15,19 @@
     "lint": "npm run lint --prefix backend && npm run lint --prefix mobile-app",
     "lint:fix": "npm run lint:fix --prefix backend && npm run lint:fix --prefix mobile-app",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "clean": "npm run clean:deps && npm run clean:cache",
+    "clean:deps": "Remove-Item -Recurse -Force node_modules, backend/node_modules, mobile-app/node_modules, package-lock.json, backend/package-lock.json, mobile-app/package-lock.json -ErrorAction SilentlyContinue",
+    "clean:cache": "npm cache clean --force",
+    "validate:env": "npm run validate:env --prefix backend && npm run validate:env --prefix mobile-app",
+    "setup:env": "echo 'Copy .env.example files to .env and fill in your values' && echo 'Backend: backend/.env.example -> backend/.env' && echo 'Mobile: mobile-app/.env.example -> mobile-app/.env'",
+    "deploy:guide": "echo 'See DEPLOYMENT_GUIDE.md for platform-specific deployment instructions'"
   },
   "devDependencies": {
-    "prettier": "^3.1.0"
+    "prettier": "3.1.1"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.18.0",
+    "npm": ">=9.0.0"
   }
 }

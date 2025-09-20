@@ -1,0 +1,49 @@
+# DigitalOcean App Platform Configuration
+# This file defines the app structure for deployment
+
+name: persona-arcana-backend
+region: nyc
+
+services:
+- name: api
+  source_dir: /backend
+  github:
+    repo: your-username/persona-arcana-mobile
+    branch: main
+  run_command: npm start
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xxs
+  
+  # Environment variables (set these in DO dashboard for security)
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: PORT
+    value: "3000"
+  # Note: Sensitive variables like MONGODB_URI, JWT_SECRET, etc.
+  # should be set in the DigitalOcean dashboard, not here
+  
+  health_check:
+    http_path: /health
+    initial_delay_seconds: 30
+    period_seconds: 10
+    timeout_seconds: 5
+    success_threshold: 1
+    failure_threshold: 3
+
+# Static site for documentation (optional)
+static_sites:
+- name: docs
+  source_dir: /docs
+  github:
+    repo: your-username/persona-arcana-mobile
+    branch: main
+  build_command: echo "No build needed"
+  output_dir: /
+
+# Database (use managed MongoDB Atlas instead)
+# databases:
+# - name: persona-arcana-db
+#   engine: MONGODB
+#   version: "5"

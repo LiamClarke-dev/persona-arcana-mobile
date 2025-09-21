@@ -8,7 +8,7 @@
       "distribution": "internal",
       "env": {
         "ENVIRONMENT": "development",
-        "API_URL": "http://localhost:3000",
+        "API_URL": "http://192.168.3.10:3000",
         "DEBUG_MODE": "true"
       }
     },

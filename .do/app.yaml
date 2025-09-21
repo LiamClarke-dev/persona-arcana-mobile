@@ -6,11 +6,11 @@ region: sfo3
 
 services:
 - name: api
-  source_dir: /backend
+  source_dir: backend
   github:
     repo: your-username/persona-arcana-mobile
     branch: main
-  build_command: npm ci --only=production
+  build_command: npm install
   run_command: npm start
   environment_slug: node-js
   instance_count: 1
@@ -20,6 +20,8 @@ services:
   envs:
   - key: NODE_ENV
     value: production
+  - key: NODE_VERSION
+    value: "22.16.0"
   # Note: PORT is automatically set by DigitalOcean App Platform
   # Note: Sensitive variables like MONGODB_URI, JWT_SECRET, etc.
   # should be set in the DigitalOcean dashboard, not here
